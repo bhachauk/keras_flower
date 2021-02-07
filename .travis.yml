@@ -7,6 +7,7 @@ python:
 
 before_install:
   - pip3 install -r requirements.txt
+  - python3 setup.py install
 
 script: pytest -q tests/test.py
 
