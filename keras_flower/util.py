@@ -1,7 +1,8 @@
 import tensorflow as tf
 import numpy as np
 from PIL import Image
-import os
+from keras.utils import get_file
+
 
 model_input_shape = (224, 224)
 model = tf.keras.Sequential([
@@ -9,18 +10,34 @@ model = tf.keras.Sequential([
         tf.keras.layers.GlobalAveragePooling2D(),
         tf.keras.layers.Dense(104, activation='softmax')
     ])
-model.load_weights(os.path.abspath("keras_flower_weights.h5"))
-labels = np.loadtxt(os.path.abspath("keras_flower/labels.txt"), dtype='str', delimiter="\n")
+model_url = "https://github.com/Bhanuchander210/keras_flower/raw/master/keras_flower_weights.h5"
+labels_url = "https://github.com/Bhanuchander210/keras_flower/raw/master/keras_flower_labels.txt"
+model_dir = "keras_flower"
+model.load_weights(get_file("keras_flower_weights.h5", model_url, cache_subdir=model_dir))
+labels = np.loadtxt(get_file("keras_flower_labels.txt", labels_url, cache_subdir=model_dir), dtype='str', delimiter="\n")
 
 
-def predict(act_path):
-    img = Image.open(act_path).resize(model_input_shape)
-    image = np.array(img)
+def predict(image):
+    image = np.array(image)
     image = image / 255.0
     results = model.predict(np.expand_dims(image, axis=0))[0]
     return results
 
 
-def predict_name(act_path, top=1):
-    results = predict(act_path)
+def predict_by_path(act_path):
+    img = Image.open(act_path).resize(model_input_shape)
+    return predict(img)
+
+
+def get_label_score(results, top):
     return sorted(zip(labels, results), key=lambda x: x[1], reverse=True)[:top]
+
+
+def predict_name(image_array, top=1):
+    results = predict(image_array)
+    return get_label_score(results, top)
+
+
+def predict_name_by_path(act_path, top=1):
+    results = predict_by_path(act_path)
+    return get_label_score(results, top)
