@@ -1,5 +1,7 @@
 # Keras Flower
 
+[![status](https://api.travis-ci.com/bhanuchander210/keras_flower.png)](https://travis-ci.com/github/Bhanuchander210/keras_flower)
+
 A Simple Flower classification package using DenseNet201.
 
 - Classes   : [104 classes of flowers](keras_flower_labels.txt)
