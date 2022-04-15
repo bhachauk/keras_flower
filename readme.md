@@ -1,6 +1,6 @@
 # Keras Flower
 
-[![status](https://api.travis-ci.com/bhanuchander210/keras_flower.png)](https://travis-ci.com/github/Bhanuchander210/keras_flower)
+[![status](https://api.travis-ci.com/bhanuchander210/keras_flower.png)](https://travis-ci.com/github/Bhanuchander210/keras_flower) [![coverage](https://img.shields.io/codecov/c/github/bhanuchander210/keras_flower)](https://app.codecov.io/gh/Bhanuchander210/keras_flower)
 
 A Simple Flower classification package using DenseNet201.
 

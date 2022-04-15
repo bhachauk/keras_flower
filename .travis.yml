@@ -8,8 +8,11 @@ python:
 before_install:
   - pip3 install -r requirements.txt
   - python3 setup.py install
+  - pip install pytest-codecov
 
-script: python3 tests/test.py
+script:
+  - pytest --cov-report term --cov-report xml:coverage.xml --cov=keras_flower tests/test.py
+  - curl -Os https://uploader.codecov.io/latest/linux/codecov && chmod +x codecov && ./codecov -t d158ffb6-7528-40dd-a0f2-6617fe6a360c
 
 notifications:
   email: false
