@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 from keras.utils import get_file
+from keras.models import Model
 
 
 model_input_shape = (224, 224)
@@ -15,18 +16,34 @@ labels_url = "https://github.com/Bhanuchander210/keras_flower/raw/master/keras_f
 model_dir = "keras_flower"
 model.load_weights(get_file("keras_flower_weights.h5", model_url, cache_subdir=model_dir))
 labels = np.loadtxt(get_file("keras_flower_labels.txt", labels_url, cache_subdir=model_dir), dtype='str', delimiter="\n")
+embed_model = Model(inputs=model.input, outputs=model.layers[-2].output)
+
+
+def __get_img_from_path(img_path):
+    return Image.open(img_path).resize(model_input_shape)
+
+
+def __get_img(image):
+    image = np.array(image)
+    image = image / 255.0
+    return np.expand_dims(image, axis=0)
 
 
 def predict(image):
-    image = np.array(image)
-    image = image / 255.0
-    results = model.predict(np.expand_dims(image, axis=0))[0]
+    results = model.predict(__get_img(image))[0]
     return results
 
 
+def embed(image):
+    return embed_model.predict(__get_img(image))[0]
+
+
+def embed_by_path(img_file):
+    return embed(__get_img_from_path(img_file))
+
+
 def predict_by_path(act_path):
-    img = Image.open(act_path).resize(model_input_shape)
-    return predict(img)
+    return predict(__get_img_from_path(act_path))
 
 
 def get_label_score(results, top):
