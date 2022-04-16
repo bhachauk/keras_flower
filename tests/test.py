@@ -13,9 +13,9 @@ def test_sunflower():
 def test_sunflower_array():
     file_name = "example/sonflower.jpeg"
     image = Image.open(file_name).resize((224, 224))
-    image = np.array(image)
-    image = image / 255.0
-    return np.expand_dims(image, axis=0)
+    predicted, score = kf.predict_name(np.array(image))[0]
+    assert predicted == 'sunflower'
+    assert score >= 0.7
 
 
 def test_embed():
@@ -30,4 +30,7 @@ if __name__ == '__main__':
     # file_name = "example/sonflower.jpeg"
     # predicted, score = kf.predict_name_by_path(file_name)[0]
     # print(predicted)
+    test_sunflower()
+    test_sunflower_array()
+    # test_embed()
     pass
