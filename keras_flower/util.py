@@ -4,7 +4,6 @@ from PIL import Image
 from keras.utils import get_file
 from keras.models import Model
 
-
 model_input_shape = (224, 224)
 model = tf.keras.Sequential([
         tf.keras.applications.DenseNet201(weights=None, include_top=False, input_shape=[*model_input_shape, 3]),
