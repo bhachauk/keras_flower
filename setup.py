@@ -18,5 +18,5 @@ setup(name='keras_flower',
       packages=['keras_flower'],
       include_package_data=True,
       zip_safe=False,
-      install_requires=['tensorflow>=2.2.0', 'keras>=2.9.0', 'pillow>=8.0.1']
+      install_requires=['tensorflow>=2.2.0', 'keras>=2.9.0rc0', 'pillow>=8.0.1']
       )
