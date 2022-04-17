@@ -1,9 +1,8 @@
 import tensorflow as tf
 import numpy as np
 from PIL import Image
-from keras.utils import get_file
-from keras.models import Model
-
+from tensorflow.keras.utils import get_file
+from tensorflow.keras.models import Model
 
 model_input_shape = (224, 224)
 model = tf.keras.Sequential([

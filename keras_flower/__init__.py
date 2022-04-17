@@ -1,4 +1,4 @@
-__version__ = 0.2
+__version__ = 0.3
 from.util import predict, embed, embed_by_path
 from.util import predict_name
 from.util import labels
