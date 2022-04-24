@@ -35,19 +35,28 @@ layout = list()
 
 layout.append(header('Visualizing VGG Flowers in 3D Space'))
 
+title_links = [
+    ('https://pypi.org/project/keras-flower/', 'https://img.shields.io/badge/PyPI-keras_flower-GREEN?style=for-the-badge&logo=appveyor'),
+    ('https://github.com/Bhanuchander210/keras_flower', 'https://img.shields.io/badge/GitHub-keras_flower-GREEN?style=for-the-badge&logo=appveyor')
+]
+
+title_links_div = [html.A(href=href, children=[html.Img(src=src)], style={'margin': '5px', 'margin-top': '10px'}) for href, src in title_links]
+layout.append(html.Div(children=title_links_div, style={'text-align': 'center'}))
+
 layout.append(
-    html.Div(children=[
-        dcc.Dropdown(
-            options=['PCA', 't-SNE'],
-            value='PCA',
-            id='demo-dropdown', style=dict(width='300px')
-        ),
-        dcc.Dropdown(
-            options=list(select_dict.keys()),
-            value='Random-5',
-            id='demo1-dropdown', style=dict(width='300px')
-        )
-    ], style={'display': "flex"}))
+        html.Div(children=[
+            dcc.Dropdown(
+                options=['PCA', 't-SNE'],
+                value='PCA',
+                id='demo-dropdown', style=dict(width='300px', margin='10px')
+            ),
+            dcc.Dropdown(
+                options=list(select_dict.keys()),
+                value='Random-5',
+                id='demo1-dropdown', style=dict(width='300px', margin='10px')
+            )
+        ], style={'display': "flex", "margin-left": "35%", "margin-top": "50px"})
+)
 
 layout.append(html.Div(id='dd-output-container'))
 app.layout = html.Div(children=layout)

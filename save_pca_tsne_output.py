@@ -2,7 +2,6 @@ import os
 from urllib import request
 import tarfile
 import scipy.io
-import keras_flower as kf
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
@@ -40,6 +39,7 @@ def get_images():
 
 
 def get_embeds():
+    import keras_flower as kf
     _file = 'embeds.npy'
     if os.path.exists(_file):
         embeds = np.load(file=_file, allow_pickle=True)
